@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<KonnektingDevice xmlns="http://konnekting.de/xml/KonnektingDevice/v0">
+    <Device ManufacturerId="57005" DeviceId="1" Revision="2">
+        <ManufacturerName>DEFL</ManufacturerName>
+        <DeviceName>RoomSensor</DeviceName>
+        <Parameters>
+
+            <ParameterGroup Name="Led" Id="0">
+                <Parameter Id="0" IdName="ledMode">
+                    <Description>Led mode</Description>
+                    <Value Type="uint8" Default="02" Options="00=On|01=On on alert|02=On while motion detected"/>
+                </Parameter>
+            </ParameterGroup>
+
+            <ParameterGroup Name="AS312 (PIR)" Id="1">
+                <Parameter Id="1" IdName="as312TriggerMode">
+                    <Description>Trigger mode</Description>
+                    <Value Type="uint8" Default="02" Options="00=Sensor 1 only|01=Sensor 2 only|02=Either sensor|03=Both sensors"/>
+                </Parameter>
+            </ParameterGroup>
+
+            <ParameterGroup Name="CSS811 (co2/voc)" Id="2">
+                <Parameter Id="2" IdName="ccs811Mode">
+                    <Description>Sampling mode (reset sensor to take effect)</Description>
+                    <Value Type="uint8" Default="02" Options="00=continous|01=every 1s|02=every 10s (pulse)|03=every 60s (pulse)"/>
+                </Parameter>
+                <Parameter Id="3" IdName="ccs811Eco2DiffReportingThreshold">
+                    <Description>eCO2 diff reporting threshold</Description>
+                    <Value Type="uint16" Default="0032" Min="0000" Max="1E70"/>
+                </Parameter>
+                <Parameter Id="4" IdName="ccs811Eco2MaxLimit">
+                    <Description>eCO2 max limit</Description>
+                    <Value Type="uint16" Default="0000" Min="0000" Max="2000"/>
+                </Parameter>
+                <Parameter Id="5" IdName="ccs811Eco2MaxTriggeredValue">
+                    <Description>eCO2 max triggered value</Description>
+                    <Value Type="uint8" Default="FF" Options="01=On|00=Off|FF=Not sent"/>
+                </Parameter>
+                <Parameter Id="6" IdName="ccs811TvocDiffReportingThreshold">
+                    <Description>tVOC diff reporting threshold</Description>
+                    <Value Type="uint16" Default="0032" Min="0000" Max="1E70"/>
+                </Parameter>
+                <Parameter Id="7" IdName="ccs811TvocMaxLimit">
+                    <Description>tVOC max limit</Description>
+                    <Value Type="uint16" Default="0000" Min="0000" Max="04A3"/>
+                </Parameter>
+                <Parameter Id="8" IdName="ccs811TvocMaxTriggeredValue">
+                    <Description>tVOC max triggered value</Description>
+                    <Value Type="uint8" Default="FF" Options="01=On|00=Off|FF=Not sent"/>
+                </Parameter>
+            </ParameterGroup>
+
+            <ParameterGroup Name="BME280 (Temp/Hum/Press)" Id="3">
+                <Parameter Id="9" IdName="bme280PollingIntervalMs">
+                    <Description>Polling interval (ms)</Description>
+                    <Value Type="uint32" Default="00002710" Min="00000000" Max="FFFFFFFF"/>
+                </Parameter>
+                <Parameter Id="10" IdName="bme280TempDiffReportingThreshold">
+                    <Description>Temp diff reporting threshold</Description>
+                    <Value Type="uint8" Default="02" Options="01=0,1°|02=0,2°|03=0,3°|04=0,4°|05=0,5°|06=0,6°|07=0,7°|08=0,8°|09=0,1°|10=1°|15=1,5°|20=2°"/>
+                </Parameter>
+                <Parameter Id="11" IdName="bme280TempMinLimit">
+                    <Description>Temp min limit</Description>
+                    <Value Type="int8" Default="00" Min="00" Max="FF"/>
+                </Parameter>
+                <Parameter Id="12" IdName="bme280TempMinTriggeredValue">
+                    <Description>Temp min triggered value</Description>
+                    <Value Type="uint8" Default="FF" Options="01=On|00=Off|FF=Not sent"/>
+                </Parameter>
+                <Parameter Id="13" IdName="bme280TempMaxLimit">
+                    <Description>Temp max limit</Description>
+                    <Value Type="int8" Default="00" Min="00" Max="FF"/>
+                </Parameter>
+                <Parameter Id="14" IdName="bme280TempMaxTriggeredValue">
+                    <Description>Temp max triggered value</Description>
+                    <Value Type="uint8" Default="FF" Options="01=On|00=Off|FF=Not sent"/>
+                </Parameter>
+                <Parameter Id="15" IdName="bme280RhDiffReportingThreshold">
+                    <Description>Humidity diff reporting threshold</Description>
+                     <Value Type="uint8" Default="10" Options="05=0,5%|10=1%|15=1,5%|20=2%|25=2,5%|30=3%|35=3,5%|40=4%"/>
+                </Parameter>
+                <Parameter Id="16" IdName="bme280RhMinLimit">
+                    <Description>Humidity min limit</Description>
+                    <Value Type="uint8" Default="00" Min="00" Max="64"/>
+                </Parameter>
+                <Parameter Id="17" IdName="bme280RhMinTriggeredValue">
+                    <Description>Humidity min triggered value</Description>
+                    <Value Type="uint8" Default="FF" Options="01=On|00=Off|FF=Not sent"/>
+                </Parameter>
+                <Parameter Id="18" IdName="bme280RhMaxLimit">
+                    <Description>Humidity max limit</Description>
+                    <Value Type="uint8" Default="00" Min="00" Max="64"/>
+                </Parameter>
+                <Parameter Id="19" IdName="bme280RhMaxTriggeredValue">
+                    <Description>Humidity max triggered value</Description>
+                    <Value Type="uint8" Default="FF" Options="01=On|00=Off|FF=Not sent"/>
+                </Parameter>
+                <Parameter Id="20" IdName="bme280PressDiffReportingThreshold">
+                    <Description>Pressure diff reporting threshold</Description>
+                     <Value Type="uint8" Default="10" Options="01=1 mbar|05=5 mbar|10=10 mbar|50=50 mbar"/>
+                </Parameter>
+                <Parameter Id="21" IdName="bme280PressMinLimit">
+                    <Description>Pressure min limit (mbar)</Description>
+                    <Value Type="uint16" Default="00" Min="00" Max="FF"/>
+                </Parameter>
+                <Parameter Id="22" IdName="bme280PressMinTriggeredValue">
+                    <Description>Pressure min triggered value</Description>
+                    <Value Type="uint8" Default="FF" Options="01=On|00=Off|FF=Not sent"/>
+                </Parameter>
+                <Parameter Id="23" IdName="bme280PressMaxLimit">
+                    <Description>Pressure max limit (mbar)</Description>
+                    <Value Type="uint16" Default="00" Min="00" Max="FF"/>
+                </Parameter>
+                <Parameter Id="24" IdName="bme280PressMaxTriggeredValue">
+                    <Description>Pressure max triggered value</Description>
+                    <Value Type="uint8" Default="FF" Options="01=On|00=Off|FF=Not sent"/>
+                </Parameter>
+            </ParameterGroup>
+
+            <ParameterGroup Name="MAX44009 (Lux)" Id="4">
+                <Parameter Id="25" IdName="max44009LuxDiffReportingThresholdPct">
+                    <Description>Lux diff reporting threshold</Description>
+                    <Value Type="uint8" Default="10" Options="01=1%|05=5%|10=10%|50=50%|100=100%|200=200%"/>
+                </Parameter>
+                <Parameter Id="26" IdName="max44009LuxMaxLimit">
+                    <Description>Lux max limit</Description>
+                    <Value Type="uint32" Default="00000000" Min="00000000" Max="0B34A700"/>
+                </Parameter>
+                <Parameter Id="27" IdName="max44009LuxTriggeredValue">
+                    <Description>Lux max triggered value</Description>
+                    <Value Type="uint8" Default="FF" Options="01=On|00=Off|FF=Not sent"/>
+                </Parameter>
+            </ParameterGroup>
+
+        </Parameters>
+        <CommObjects>
+
+            <CommObject Id="0" IdName="motion">
+                <Name>Motion</Name>
+                <Function>Detected</Function>
+                <DataPointType>1.001</DataPointType>
+                <Flags>52</Flags>
+            </CommObject>
+
+            <CommObject Id="1" IdName="eco2Value">
+                <Name>eCO2</Name>
+                <Function>Value</Function>
+                <DataPointType>9.008</DataPointType>
+                <Flags>52</Flags>
+            </CommObject>
+            <CommObject Id="2" IdName="eco2MaxLimitReached">
+                <Name>eCO2</Name>
+                <Function>Max limit reached</Function>
+                <DataPointType>1.001</DataPointType>
+                <Flags>52</Flags>
+            </CommObject>
+            <CommObject Id="3" IdName="tvocValue">
+                <Name>tVOC</Name>
+                <Function>Value</Function>
+                <DataPointType>9.008</DataPointType> <!-- This is ppm while measurement is ppb -->
+                <Flags>52</Flags>
+            </CommObject>
+            <CommObject Id="4" IdName="tvocMaxLimitReached">
+                <Name>tVOC</Name>
+                <Function>Max limit reached</Function>
+                <DataPointType>1.001</DataPointType>
+                <Flags>52</Flags>
+            </CommObject>
+
+            <CommObject Id="5" IdName="tempValue">
+                <Name>Temp</Name>
+                <Function>Measured value</Function>
+                <DataPointType>9.001</DataPointType>
+                <Flags>52</Flags>
+            </CommObject>
+            <CommObject Id="6" IdName="tempMinLimitReached">
+                <Name>Temp</Name>
+                <Function>Min limit reached</Function>
+                <DataPointType>1.001</DataPointType>
+                <Flags>52</Flags>
+            </CommObject>
+            <CommObject Id="7" IdName="tempMaxLimitReached">
+                <Name>Temp</Name>
+                <Function>Max limit reached</Function>
+                <DataPointType>1.001</DataPointType>
+                <Flags>52</Flags>
+            </CommObject>
+            <CommObject Id="8" IdName="rhValue">
+                <Name>Humidity</Name>
+                <Function>Measured value</Function>
+                <DataPointType>9.007</DataPointType>
+                <Flags>52</Flags>
+            </CommObject>
+            <CommObject Id="9" IdName="rhMinLimitReached">
+                <Name>Humidity</Name>
+                <Function>Min limit reached</Function>
+                <DataPointType>1.001</DataPointType>
+                <Flags>52</Flags>
+            </CommObject>
+            <CommObject Id="10" IdName="rhMaxLimitReached">
+                <Name>Humidity</Name>
+                <Function>Max limit reached</Function>
+                <DataPointType>1.001</DataPointType>
+                <Flags>52</Flags>
+            </CommObject>
+            <CommObject Id="11" IdName="pressValue">
+                <Name>Pressure</Name>
+                <Function>Measured value</Function>
+                <DataPointType>9.006</DataPointType>
+                <Flags>52</Flags>
+            </CommObject>
+            <CommObject Id="12" IdName="pressMinLimitReached">
+                <Name>Pressure</Name>
+                <Function>Min limit reached</Function>
+                <DataPointType>1.001</DataPointType>
+                <Flags>52</Flags>
+            </CommObject>
+            <CommObject Id="13" IdName="pressMaxLimitReached">
+                <Name>Pressure</Name>
+                <Function>Max limit reached</Function>
+                <DataPointType>1.001</DataPointType>
+                <Flags>52</Flags>
+            </CommObject>
+
+            <CommObject Id="14" IdName="luxValue">
+                <Name>Lux</Name>
+                <Function>Value</Function>
+                <DataPointType>9.004</DataPointType>
+                <Flags>52</Flags>
+            </CommObject>
+            <CommObject Id="15" IdName="luxMaxLimitReached">
+                <Name>Lux</Name>
+                <Function>Max limit reached</Function>
+                <DataPointType>1.001</DataPointType>
+                <Flags>52</Flags>
+            </CommObject>
+
+        </CommObjects>
+        <Dependencies>
+        </Dependencies>
+    </Device>
+</KonnektingDevice>
