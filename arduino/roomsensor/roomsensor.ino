@@ -107,6 +107,7 @@ volatile bool readBme280 = true;
 volatile bool readMax44009 = true;
 volatile bool as312_1_motion = false;
 volatile bool as312_2_motion = false;
+volatile bool readMotion = true;
 
 
 
@@ -193,14 +194,42 @@ ISR (PCINT2_vect)
   if(digitalRead(PIN_MAX44009_INTERRUPT) == LOW)
     readMax44009 = true;
 
-  as312_1_motion = (digitalRead(PIN_AS312_1_MOTION) == HIGH);
-  as312_2_motion = (digitalRead(PIN_AS312_2_MOTION) == HIGH);
+  const bool as312_1_motion_new = (digitalRead(PIN_AS312_1_MOTION) == HIGH);
+  if(as312_1_motion_new != as312_1_motion)
+  {
+    as312_1_motion = as312_1_motion_new;
+    readMotion = true;
+  }
+
+  const bool as312_2_motion_new = (digitalRead(PIN_AS312_2_MOTION) == HIGH);
+  if(as312_2_motion_new != as312_2_motion)
+  {
+    as312_2_motion = as312_2_motion_new;
+    readMotion = true;
+  }
 }
+
 
 // Interrupt handler for the BME280 timer
 void interrupt_bme280_timer()
 {
   readBme280 = true;
+}
+
+
+// Wake CCS881 chip
+void ccs811Wake()
+{
+  digitalWrite(PIN_CCS811_WAKE, LOW); 
+  delayMicroseconds(55);  // Need to wait at least 50 us
+}
+
+
+// Put CCS811 chip to sleep
+void ccs811Sleep()
+{
+  digitalWrite(PIN_CCS811_WAKE, HIGH);
+  delayMicroseconds(25);  // Need to be asleep for at least 20 us
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -228,9 +257,7 @@ void setup()
 
   digitalWrite(PIN_DEBUG_LED, LOW);
   digitalWrite(PIN_LED, LOW);
-  digitalWrite(PIN_CCS811_INTERRUPT, HIGH);  // CCS811 will drive this low if data is ready
   digitalWrite(PIN_CCS811_WAKE, LOW);  // If low, CCS811 cpu is active and will respond to I2C bus. If high in sleep mode. Start active.
-  //digitalWrite(PIN_SW1, HIGH);  // KonnektingDevice.cpp ties this to RISING external input, pullup is is commented out in their code. Do this before Konnekting.init()
 
   // KNX
   // If this fails it'll reboot the chip which then calls setup() again making a loop.
@@ -292,7 +319,7 @@ void setup()
     blinkLed(ERROR_CCS811);
     delay(1000);
   }
-  //TODO digitalWrite(PIN_CCS811_WAKE, HIGH);  // Configured, go to sleep
+  ccs811Sleep();
 
   // BME280
   while(!bme280.begin())
@@ -340,7 +367,6 @@ void loop()
   Knx.task();
 
   // Don't proceed until ready.
-  // Run hot.
   if(!Konnekting.isReadyForApplication() || Konnekting.isProgState())
     return;
 
@@ -351,12 +377,9 @@ void loop()
 
   if(readCcs881)
   { 
-    //digitalWrite(PIN_CCS811_WAKE, LOW); 
-    //delayMicroseconds(60);  // Need to wait at least 50 us
-    // TODO: Assert: ccs811.dataAvailable() ?
+    ccs811Wake();
     ccs811.readAlgorithmResults();
-    //digitalWrite(PIN_CCS811_WAKE, HIGH);
-    //delayMicroseconds(30);  // Need to be asleep for at least 20 us
+    ccs811Sleep();
 
     const uint16_t ccs881eCo2 = ccs811.getCO2();
     const uint16_t ccs881TVoc = ccs811.getTVOC();
@@ -374,8 +397,6 @@ void loop()
       blinkLed(ERROR_CCS811);
 
     readCcs881 = false;
-
-    blinkLed(10); // TODO: Remove me
   }
 
   // BME280
@@ -416,11 +437,9 @@ void loop()
         if(abs(ccs811SetTemp - bme280Temp) > 0.5 ||
            abs(ccs811SetRh - bme280Rh) > 0.5)
         {
-          //digitalWrite(PIN_CCS811_WAKE, LOW);
-          //delayMicroseconds(60);  // Need to wait at least 50 us
+          ccs811Wake();
           ccs811.setEnvironmentalData(bme280Rh, bme280Temp);
-          //digitalWrite(PIN_CCS811_WAKE, HIGH);
-          //delayMicroseconds(30);  // Need to be asleep for at least 20 us
+          ccs811Sleep();
   
           ccs811SetTemp = bme280Temp;
           ccs811SetRh = bme280Rh;
@@ -464,6 +483,7 @@ void loop()
   // AS312
   //
   static bool motionPrevious = false;
+  if(readMotion)
   {
     bool motion = false;
     switch(config.as312TriggerMode)

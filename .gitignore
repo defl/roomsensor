@@ -1,2 +1,5 @@
 /kicad/roomsensor.net
 /kicad/*-bak
+/kicad/*.bak
+/kicad/*.bak
+/arduino/roomsensor/*.kconfig.xml
