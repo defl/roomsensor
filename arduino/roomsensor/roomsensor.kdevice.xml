@@ -15,7 +15,7 @@
             <ParameterGroup Name="AS312 (PIR)" Id="1">
                 <Parameter Id="1" IdName="as312TriggerMode">
                     <Description>Trigger mode</Description>
-                    <Value Type="uint8" Default="02" Options="00=Sensor 1 only|01=Sensor 2 only|02=Either sensor|03=Both sensors"/>
+                    <Value Type="uint8" Default="02" Options="00=Sensor 1 only|01=Sensor 2 only|02=Either sensor|03=Both sensors|04=Off"/>
                 </Parameter>
             </ParameterGroup>
 
@@ -30,7 +30,7 @@
                 </Parameter>
                 <Parameter Id="4" IdName="ccs811Eco2MaxLimit">
                     <Description>eCO2 max limit</Description>
-                    <Value Type="uint16" Default="0000" Min="0000" Max="2000"/>
+                    <Value Type="uint16" Default="0FA0" Min="0190" Max="2000"/>
                 </Parameter>
                 <Parameter Id="5" IdName="ccs811Eco2MaxTriggeredValue">
                     <Description>eCO2 max triggered value</Description>
@@ -42,7 +42,7 @@
                 </Parameter>
                 <Parameter Id="7" IdName="ccs811TvocMaxLimit">
                     <Description>tVOC max limit</Description>
-                    <Value Type="uint16" Default="0000" Min="0000" Max="04A3"/>
+                    <Value Type="uint16" Default="03E8" Min="0000" Max="04A3"/>
                 </Parameter>
                 <Parameter Id="8" IdName="ccs811TvocMaxTriggeredValue">
                     <Description>tVOC max triggered value</Description>
@@ -61,7 +61,7 @@
                 </Parameter>
                 <Parameter Id="11" IdName="bme280TempMinLimit">
                     <Description>Temp min limit</Description>
-                    <Value Type="int8" Default="00" Min="00" Max="FF"/>
+                    <Value Type="int8" Default="02" Min="80" Max="7F"/>
                 </Parameter>
                 <Parameter Id="12" IdName="bme280TempMinTriggeredValue">
                     <Description>Temp min triggered value</Description>
@@ -69,7 +69,7 @@
                 </Parameter>
                 <Parameter Id="13" IdName="bme280TempMaxLimit">
                     <Description>Temp max limit</Description>
-                    <Value Type="int8" Default="00" Min="00" Max="FF"/>
+                    <Value Type="int8" Default="32" Min="80" Max="7F"/>
                 </Parameter>
                 <Parameter Id="14" IdName="bme280TempMaxTriggeredValue">
                     <Description>Temp max triggered value</Description>
@@ -81,7 +81,7 @@
                 </Parameter>
                 <Parameter Id="16" IdName="bme280RhMinLimit">
                     <Description>Humidity min limit</Description>
-                    <Value Type="uint8" Default="00" Min="00" Max="64"/>
+                    <Value Type="uint8" Default="0A" Min="00" Max="64"/>
                 </Parameter>
                 <Parameter Id="17" IdName="bme280RhMinTriggeredValue">
                     <Description>Humidity min triggered value</Description>
@@ -89,7 +89,7 @@
                 </Parameter>
                 <Parameter Id="18" IdName="bme280RhMaxLimit">
                     <Description>Humidity max limit</Description>
-                    <Value Type="uint8" Default="00" Min="00" Max="64"/>
+                    <Value Type="uint8" Default="63" Min="00" Max="64"/>
                 </Parameter>
                 <Parameter Id="19" IdName="bme280RhMaxTriggeredValue">
                     <Description>Humidity max triggered value</Description>
@@ -97,11 +97,11 @@
                 </Parameter>
                 <Parameter Id="20" IdName="bme280PressDiffReportingThreshold">
                     <Description>Pressure diff reporting threshold</Description>
-                     <Value Type="uint8" Default="10" Options="01=1 mbar|05=5 mbar|10=10 mbar|50=50 mbar"/>
+                     <Value Type="uint8" Default="02" Options="01=1 mbar|02=2 mbar|03=3 mbar|04=4 mbar|05=5 mbar|10=10 mbar"/>
                 </Parameter>
                 <Parameter Id="21" IdName="bme280PressMinLimit">
                     <Description>Pressure min limit (mbar)</Description>
-                    <Value Type="uint16" Default="00" Min="00" Max="FF"/>
+                    <Value Type="uint16" Default="03D4" Min="012C" Max="044C"/>
                 </Parameter>
                 <Parameter Id="22" IdName="bme280PressMinTriggeredValue">
                     <Description>Pressure min triggered value</Description>
@@ -109,7 +109,7 @@
                 </Parameter>
                 <Parameter Id="23" IdName="bme280PressMaxLimit">
                     <Description>Pressure max limit (mbar)</Description>
-                    <Value Type="uint16" Default="00" Min="00" Max="FF"/>
+                    <Value Type="uint16" Default="0424" Min="012C" Max="044C"/>
                 </Parameter>
                 <Parameter Id="24" IdName="bme280PressMaxTriggeredValue">
                     <Description>Pressure max triggered value</Description>
@@ -124,7 +124,7 @@
                 </Parameter>
                 <Parameter Id="26" IdName="max44009LuxMaxLimit">
                     <Description>Lux max limit</Description>
-                    <Value Type="uint32" Default="00000000" Min="00000000" Max="0B34A700"/>
+                    <Value Type="uint32" Default="0002BF20" Min="00000000" Max="0B34A700"/>
                 </Parameter>
                 <Parameter Id="27" IdName="max44009LuxTriggeredValue">
                     <Description>Lux max triggered value</Description>
