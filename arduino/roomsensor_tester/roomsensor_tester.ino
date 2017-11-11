@@ -21,8 +21,8 @@
 static const byte PIN_LED = A0;  // PC0, output
 static const byte PIN_CCS811_INTERRUPT = A1;  // PC1,PCINT9 input
 static const byte PIN_CCS811_WAKE = A2;  // PC2, output
-static const byte PIN_SW1 = 2;  // PD2,PCINT18 input; Konnecting KNX programming button, must be on "external input" (PD2, PD3)
 static const byte PIN_MAX44009_INTERRUPT = A3;  // PC3,PCINT11 input
+static const byte PIN_SW1 = 2;  // PD2,PCINT18 input; Konnecting KNX programming button, must be on "external input" (PD2, PD3)
 static const byte PIN_AS312_1_MOTION = 5;  // PD5,PCINT21 input
 static const byte PIN_AS312_2_MOTION = 6;  // PD6,PCINT22 input
 
