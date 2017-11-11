@@ -263,8 +263,6 @@ SDA
 Text Label 1400 6900 2    60   ~ 0
 SCL
 NoConn ~ 2200 7000
-Text Label 3500 2900 0    60   ~ 0
-PD3
 Text Label 3500 3100 0    60   ~ 0
 PD5
 $Comp
@@ -285,7 +283,7 @@ SCL
 Text Label 6600 6750 0    60   ~ 0
 SDA
 Text Label 6600 6550 0    60   ~ 0
-PD3
+PC3
 $Comp
 L GND #PWR10
 U 1 1 59D29890
@@ -378,7 +376,6 @@ F 3 "" H 1600 950 50  0001 C CNN
 	1    1600 950 
 	1    0    0    -1  
 $EndComp
-NoConn ~ 3500 2150
 NoConn ~ 3500 1200
 NoConn ~ 3500 1100
 NoConn ~ 1600 2350
@@ -1282,7 +1279,6 @@ Text Label 3500 1950 0    60   ~ 0
 PC1
 Text Label 1400 6700 2    60   ~ 0
 PC1
-NoConn ~ 3500 3000
 Text Label 3500 2050 0    60   ~ 0
 PC2
 Text Label 1400 7200 2    60   ~ 0
@@ -1339,4 +1335,8 @@ F 3 "" H 5100 2450 50  0001 C CNN
 	1    5100 2450
 	0    1    1    0   
 $EndComp
+NoConn ~ 3500 3000
+NoConn ~ 3500 2900
+Text Label 3500 2150 0    60   ~ 0
+PC3
 $EndSCHEMATC
