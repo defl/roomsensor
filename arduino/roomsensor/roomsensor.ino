@@ -409,6 +409,14 @@ void loop()
 
   // MAX44009
   //
+
+  static unsigned long max44009PreviousPollingTimestampMs = 0;
+  if(nowMs - max44009PreviousPollingTimestampMs >= 10000)
+  {
+    max44009PreviousPollingTimestampMs = nowMs;
+    readMax44009 = true;
+  }
+  
   if(readMax44009)
   {
     max44009Lux = max44009.getLux();
@@ -416,12 +424,14 @@ void loop()
     max44009LuxMeasurementValid = max44009Lux >= MAX44009_LUX_MIN && max44009Lux <= MAX44009_LUX_MAX;
     if(max44009LuxMeasurementValid)
     {
-      static float max44009LuxPrevious = FLT_MAX;
+      static float max44009LuxPrevious = 0.0;
+
+      const float thresholdFactor = config.max44009LuxDiffReportingThresholdPct / 100.0;
       
-      const float reportingThreshold = max44009LuxPrevious * config.max44009LuxDiffReportingThresholdPct;
+      const float reportingThreshold = max44009LuxPrevious * thresholdFactor;
       writeIfDiff(max44009Lux, &max44009LuxPrevious, reportingThreshold, COMOBJ_lux);
 
-      const float factor = 1.0 + config.max44009LuxDiffReportingThresholdPct;
+      const float factor = 1.0 + thresholdFactor;
       const float highThreshold = max44009Lux * factor;
       const float lowThreshold = max44009Lux / factor;
   
