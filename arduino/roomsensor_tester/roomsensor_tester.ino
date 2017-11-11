@@ -334,24 +334,24 @@ void loop()
   //
   static bool motionPrevious = false;
   {
-    static bool as312_1_motion_previous = false;
-    static bool as312_2_motion_previous = false;
+    static bool as312MotionPrevious1 = false;
+    static bool as312MotionPrevious2 = false;
     
-    const bool as312_1_motion = (digitalRead(PIN_AS312_1_MOTION) == HIGH);
-    const bool as312_2_motion = (digitalRead(PIN_AS312_2_MOTION) == HIGH);
+    const bool as312Motion1 = (digitalRead(PIN_AS312_1_MOTION) == HIGH);
+    const bool as312Motion2 = (digitalRead(PIN_AS312_2_MOTION) == HIGH);
     
-    if(as312_1_motion != as312_1_motion_previous)
+    if(as312Motion1 != as312MotionPrevious1)
     {
       Serial.print("As312 1 motion: ");
-      Serial.println(as312_1_motion);
-      as312_1_motion_previous = as312_1_motion;
+      Serial.println(as312Motion1);
+      as312MotionPrevious1 = as312Motion1;
     }
 
-    if(as312_2_motion != as312_2_motion_previous)
+    if(as312Motion2 != as312MotionPrevious2)
     {
       Serial.print("As312 2 motion: ");
-      Serial.println(as312_2_motion);
-      as312_2_motion_previous = as312_2_motion;
+      Serial.println(as312Motion2);
+      as312MotionPrevious2 = as312Motion2;
     }
   }
 }

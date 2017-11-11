@@ -116,17 +116,9 @@ bool max44009LuxMeasurementValid = false;
 
 
 // Blink led n times at human speed (blocking)
+// Does not care about the current state of the led, might be confusing to the user. Too bad.
 void blinkLed(short blinks, unsigned long delayMs=100)
 {
-// TODO: disabled because we need the instruction space
-//  const bool ledStateWasHigh = (digitalRead(PIN_LED) == HIGH);
-//  
-//  if(ledStateWasHigh)
-//  {
-//    digitalWrite(PIN_LED, LOW);
-//    delay(100);
-//  }
-
   while(blinks>0)
   {
     digitalWrite(PIN_LED, HIGH);
@@ -136,9 +128,6 @@ void blinkLed(short blinks, unsigned long delayMs=100)
     
     --blinks;
   }
-
-//  if(ledStateWasHigh)
-//    digitalWrite(PIN_LED, HIGH);
 }
 
 
@@ -449,25 +438,25 @@ void loop()
   //
   static bool motionPrevious = false;
   {
-    const bool as312_1_motion = (digitalRead(PIN_AS312_1_MOTION) == HIGH);
-    const bool as312_2_motion = (digitalRead(PIN_AS312_2_MOTION) == HIGH);
+    const bool as312Motion1 = (digitalRead(PIN_AS312_1_MOTION) == HIGH);
+    const bool as312Motion2 = (digitalRead(PIN_AS312_2_MOTION) == HIGH);
   
     switch(config.as312TriggerMode)
     {
       case 0: // Sensor 1 only
-        motion = as312_1_motion;
+        motion = as312Motion1;
         break;
   
       case 1: // Sensor 2 only
-        motion = as312_2_motion;
+        motion = as312Motion2;
         break;
   
       case 2: // Either sensor
-        motion = as312_1_motion || as312_2_motion;
+        motion = as312Motion1 || as312Motion2;
         break;
   
       case 3: // Both sensors
-        motion = as312_1_motion && as312_2_motion;
+        motion = as312Motion1 && as312Motion2;
         break;
   
       case 4: // Off
